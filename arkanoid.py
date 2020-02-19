@@ -36,28 +36,28 @@ class Music:
         pygame.mixer.init()
         self.music_on = True
         self.music_effects = True
-        self.ping = pygame.mixer.Sound('snd/pong.wav')
+        self.ping = pygame.mixer.Sound('pong.wav')
         self.ping.set_volume(0.2)
         if self.music_on:
             self.playMenu()
         self.punch = []
-        self.punch.append(pygame.mixer.Sound('snd/punch1.wav'))
+        self.punch.append(pygame.mixer.Sound('punch1.wav'))
         for sound in self.punch:
             sound.set_volume(0.1)
-        self.fail = pygame.mixer.Sound('snd/fail.wav')
+        self.fail = pygame.mixer.Sound('fail.wav')
         self.fail.set_volume(0.5)
-        self.next = pygame.mixer.Sound('snd/nextlvl.wav')
+        self.next = pygame.mixer.Sound('nextlvl.wav')
         self.next.set_volume(0.5)
 
     def playMenu(self):
         i = random.randrange(3)
-        menu_music = 'snd/menu.wav'
+        menu_music = 'menu.wav'
         pygame.mixer.music.load(menu_music)
         pygame.mixer.music.set_volume(0.4)
         pygame.mixer.music.play()
 
     def playGame(self):
-        pygame.mixer.music.load('snd/play.wav')
+        pygame.mixer.music.load('play.wav')
         pygame.mixer.music.play()
         pygame.mixer.music.set_volume(0.1)
 
@@ -325,8 +325,8 @@ class Bonus:
         self.active = [False, False, False, False, False]
         self.time_active = [0, 0, 0, 0, 0]
         self.visible = [False, False, False, False, False]
-        self.img = [pygame.image.load("img/F.png"), pygame.image.load("img/M.png"),
-                    pygame.image.load("img/L.png"), pygame.image.load("img/T.png"), pygame.image.load("img/H.png")]
+        self.img = [pygame.image.load("F.png"), pygame.image.load("M.png"),
+                    pygame.image.load("L.png"), pygame.image.load("T.png"), pygame.image.load("H.png")]
         self.time = time.time()
         self.pos = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]]
         self.bonus0_pos = 400
@@ -482,25 +482,23 @@ class Game:
         self.playFromChoose = False
 
     def initImages(self):
-        self.img_right = pygame.image.load('img/right.png')
-        self.img_left = pygame.image.load('img/left.png')
-        self.img_up = pygame.image.load('img/up.png')
-        self.img_up2 = pygame.image.load("img/upp.png")
-        self.img_lives_3 = pygame.image.load("img/heart_3.png")
-        self.img_lives_2 = pygame.image.load("img/heart_2.png")
-        self.img_lives_1 = pygame.image.load("img/heart_1.png")
-        self.img_lives_inf = pygame.image.load("img/heart_inf.png")
-        self.img_ad = pygame.image.load("img/ad.png")
-        self.img_bullet = pygame.image.load("img/bullet.png")
+        self.img_right = pygame.image.load('right.png')
+        self.img_left = pygame.image.load('left.png')
+        self.img_up = pygame.image.load('up.png')
+        self.img_up2 = pygame.image.load("upp.png")
+        self.img_lives_3 = pygame.image.load("heart_3.png")
+        self.img_lives_2 = pygame.image.load("heart_2.png")
+        self.img_lives_1 = pygame.image.load("heart_1.png")
+        self.img_bullet = pygame.image.load("bullet.png")
         self.img_levels = []
         for i in range(1, 11):
-            self.img_levels.append(pygame.image.load("img/level_" + str(i) + ".png"))
+            self.img_levels.append(pygame.image.load("level_" + str(i) + ".png"))
         self.img_intro = []
         for i in range(34):
             if i < 10:
-                self.img_intro.append(pygame.image.load("img/intro/v1/intro_00" + str(i) + ".jpg"))
+                self.img_intro.append(pygame.image.load("intro_00" + str(i) + ".jpg"))
             else:
-                self.img_intro.append(pygame.image.load("img/intro/v1/intro_0" + str(i) + ".jpg"))
+                self.img_intro.append(pygame.image.load("intro_0" + str(i) + ".jpg"))
 
     def resetAll(self):
         stats.points = 0
@@ -775,7 +773,6 @@ class Game:
                 self.screen.blit(self.img_right, (585, 79))
                 self.screen.blit(self.img_left, (375, 79))
                 self.screen.blit(self.img_up, (510, 10))
-                # bricks
                 self.printSmall("Блоки:", 510, 150)
                 pygame.draw.rect(self.screen, self.brick_color_normal, [510, 200, self.brick_width, self.brick_height],
                                  0)
@@ -811,14 +808,12 @@ class Game:
                 self.printSmall("Game version: " + self.game_ver, 40, 50)
 
             elif self.state == STATE_MENU_OPTIONS:
-                # music and effects
                 menu_options_options = [Options("Музыка: " + str(self.music.music_on), (100, 30), self.menu_bool[4][0]),
                                         Options("Звуковые эффекты: " + str(self.music.music_effects), (100, 130),
                                                 self.menu_bool[4][1]),
                                         Options("Назад", (850, 400), self.menu_bool[4][2])]
                 for i in range(len(menu_options_options)):
                     menu_options_options[i].draw(4, i)
-                # paddle size
                 myfont = pygame.font.SysFont("monospace", 40)
                 label = myfont.render("Платформа:", 1, Grey)
                 self.screen.blit(label, (100, 230))
@@ -833,7 +828,6 @@ class Game:
                             self.paddle_index += 1
                         self.paddle_width = self.paddle_width_tab[self.paddle_index]
                         self.time_start = time.time()
-                # ball speed - slide
                 label = myfont.render("Скорость:", 1, Grey)
                 self.screen.blit(label, (100, 330))
                 pygame.draw.rect(self.screen, Grey, [400, 355, 400, 2])
